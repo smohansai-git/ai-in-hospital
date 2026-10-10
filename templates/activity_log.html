@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="panel">
+  <div class="panel-header">
+    <h3>Activity Log</h3>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Timestamp</th>
+          <th>User ID</th>
+          <th>Action</th>
+          <th>Record Type</th>
+          <th>Record ID</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for activity in activities %}
+        <tr>
+          <td>{{ activity['Timestamp'] }}</td>
+          <td>{{ activity['User ID'] }}</td>
+          <td>{{ activity['Action'] }}</td>
+          <td>{{ activity['Record Type'] }}</td>
+          <td>{{ activity['Record ID'] }}</td>
+          <td>{{ activity['Description'] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

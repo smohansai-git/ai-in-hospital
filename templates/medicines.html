@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="panel">
+  <div class="panel-header">
+    <h3>Medicine Inventory</h3>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Medicine ID</th>
+          <th>Name</th>
+          <th>Available</th>
+          <th>Minimum Stock</th>
+          <th>Unit Price</th>
+          <th>Expiry Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for medicine in medicines %}
+        <tr>
+          <td>{{ medicine['Medicine ID'] }}</td>
+          <td>{{ medicine['Medicine Name'] }}</td>
+          <td>{{ medicine['Available Quantity'] }}</td>
+          <td>{{ medicine['Minimum Stock'] }}</td>
+          <td>${{ medicine['Unit Price'] }}</td>
+          <td>{{ medicine['Expiry Date'] }}</td>
+          <td>
+            {% if medicine['Available Quantity'] < medicine['Minimum Stock'] %}
+            <span class="status-pill status-low">Low Stock</span>
+            {% else %}
+            <span class="status-pill status-good">Healthy</span>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

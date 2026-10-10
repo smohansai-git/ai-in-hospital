@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="panel">
+  <div class="panel-header">
+    <h3>Intelligent Bed Assignment</h3>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Bed ID</th>
+          <th>Ward</th>
+          <th>Type</th>
+          <th>Isolation</th>
+          <th>Equipment</th>
+          <th>Current Patient</th>
+          <th>Status</th>
+          <th>Daily Charge</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for bed in beds %}
+        <tr>
+          <td>{{ bed['Bed ID'] }}</td>
+          <td>{{ bed['Ward'] }}</td>
+          <td>{{ bed['Bed Type'] }}</td>
+          <td>{{ bed['Isolation Capability'] }}</td>
+          <td>{{ bed['Equipment Available'] }}</td>
+          <td>{{ bed['Current Patient ID'] or 'Unassigned' }}</td>
+          <td><span class="status-pill status-{{ bed['Bed Status']|lower }}">{{ bed['Bed Status'] }}</span></td>
+          <td>${{ bed['Daily Charge'] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

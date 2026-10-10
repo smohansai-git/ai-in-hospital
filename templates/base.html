@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI IN HOSPITAL</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-icon"><i class="fa-solid fa-hospital"></i></div>
+          <div>
+            <strong>AI IN HOSPITAL</strong>
+            <small>Smart Operations</small>
+          </div>
+        </div>
+
+        <nav class="nav-menu">
+          <a href="{{ url_for('dashboard') }}" class="nav-item {% if active_page == 'Overview' %}active{% endif %}"><i class="fa-solid fa-chart-pie"></i><span>Overview</span></a>
+          <a href="{{ url_for('patients') }}" class="nav-item {% if active_page == 'Patient Management' %}active{% endif %}"><i class="fa-solid fa-bed-pulse"></i><span>Patient Management</span></a>
+          <a href="{{ url_for('admit_patient') }}" class="nav-item {% if active_page == 'Patient Admission' %}active{% endif %}"><i class="fa-solid fa-user-plus"></i><span>Patient Admission</span></a>
+          <a href="{{ url_for('beds') }}" class="nav-item {% if active_page == 'Intelligent Bed Assignment' %}active{% endif %}"><i class="fa-solid fa-warehouse"></i><span>Intelligent Bed Assignment</span></a>
+          <a href="{{ url_for('discharge') }}" class="nav-item {% if active_page == 'Patient Discharge' %}active{% endif %}"><i class="fa-solid fa-person-walking-arrow-right"></i><span>Patient Discharge</span></a>
+          <a href="{{ url_for('doctors') }}" class="nav-item {% if active_page == 'Doctors and Nurses' %}active{% endif %}"><i class="fa-solid fa-user-md"></i><span>Doctors and Nurses</span></a>
+          <a href="{{ url_for('medicines') }}" class="nav-item {% if active_page == 'Medicine Inventory' %}active{% endif %}"><i class="fa-solid fa-pills"></i><span>Medicine Inventory</span></a>
+          <a href="{{ url_for('billing') }}" class="nav-item {% if active_page == 'Billing and Payments' %}active{% endif %}"><i class="fa-solid fa-file-invoice-dollar"></i><span>Billing and Payments</span></a>
+          <a href="{{ url_for('reports') }}" class="nav-item {% if active_page == 'Reports and Analytics' %}active{% endif %}"><i class="fa-solid fa-chart-line"></i><span>Reports and Analytics</span></a>
+          <a href="{{ url_for('activity') }}" class="nav-item {% if active_page == 'Activity Logs' %}active{% endif %}"><i class="fa-solid fa-clock-rotate-left"></i><span>Activity Logs</span></a>
+          <a href="{{ url_for('settings') }}" class="nav-item {% if active_page == 'Settings' %}active{% endif %}"><i class="fa-solid fa-gear"></i><span>Settings</span></a>
+          <a href="{{ url_for('logout') }}" class="nav-item logout"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></a>
+        </nav>
+      </aside>
+
+      <main class="main-panel">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Hospital Operations Console</p>
+            <h1>{{ active_page }}</h1>
+          </div>
+          <div class="user-pill">
+            <i class="fa-solid fa-circle-user"></i>
+            <span>{{ current_user['Full Name'] if current_user else 'Guest' }}</span>
+          </div>
+        </header>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <div class="flash-stack">
+              {% for category, message in messages %}
+                <div class="flash flash-{{ category }}">{{ message }}</div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+      </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  </body>
+</html>

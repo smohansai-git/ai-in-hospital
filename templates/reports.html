@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="dashboard-grid">
+  <div class="metric-card metric-primary">
+    <div class="metric-icon"><i class="fa-solid fa-user-injured"></i></div>
+    <div class="metric-body">
+      <p>Total Patients</p>
+      <h3>{{ metrics.total_patients }}</h3>
+    </div>
+  </div>
+  <div class="metric-card metric-warning">
+    <div class="metric-icon"><i class="fa-solid fa-bed"></i></div>
+    <div class="metric-body">
+      <p>Current Admissions</p>
+      <h3>{{ metrics.currently_admitted }}</h3>
+    </div>
+  </div>
+  <div class="metric-card metric-success">
+    <div class="metric-icon"><i class="fa-solid fa-dollar-sign"></i></div>
+    <div class="metric-body">
+      <p>Estimated Revenue</p>
+      <h3>${{ '%.2f' % metrics.todays_estimated_revenue }}</h3>
+    </div>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="panel-header">
+    <h3>Operational Summary</h3>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Available Beds</td><td>{{ metrics.available_beds }}</td></tr>
+        <tr><td>Occupied Beds</td><td>{{ metrics.occupied_beds }}</td></tr>
+        <tr><td>Isolation Beds Available</td><td>{{ metrics.isolation_beds_available }}</td></tr>
+        <tr><td>Pending Discharges</td><td>{{ metrics.pending_discharges }}</td></tr>
+        <tr><td>Available Doctors</td><td>{{ metrics.available_doctors }}</td></tr>
+        <tr><td>Low-Stock Medicines</td><td>{{ metrics.low_stock_medicines }}</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

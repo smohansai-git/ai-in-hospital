@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="panel">
+  <div class="panel-header">
+    <h3>Patient Records</h3>
+    <a class="primary-btn small" href="{{ url_for('admit_patient') }}"><i class="fa-solid fa-user-plus"></i> Add Patient</a>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Patient ID</th>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Disease</th>
+          <th>Category</th>
+          <th>Severity</th>
+          <th>Doctor</th>
+          <th>Bed</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for patient in patients %}
+        <tr>
+          <td>{{ patient['Patient ID'] }}</td>
+          <td>{{ patient['Patient Name'] }}</td>
+          <td>{{ patient['Age'] }}</td>
+          <td>{{ patient['Disease Name'] }}</td>
+          <td>{{ patient['Disease Category'] }}</td>
+          <td>{{ patient['Severity'] }}</td>
+          <td>{{ patient['Assigned Doctor'] }}</td>
+          <td>{{ patient['Assigned Bed'] }}</td>
+          <td><span class="status-pill status-{{ patient['Treatment Status']|lower|replace(' ', '-') }}">{{ patient['Treatment Status'] }}</span></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

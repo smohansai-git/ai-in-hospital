@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="dashboard-grid">
+  {% for card in cards %}
+  <div class="metric-card metric-{{ card.color }}">
+    <div class="metric-icon"><i class="fa-solid {{ card.icon }}"></i></div>
+    <div class="metric-body">
+      <p>{{ card.label }}</p>
+      <h3>{{ card.value }}</h3>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="panel-grid two-col">
+  <div class="panel">
+    <div class="panel-header">
+      <h3>Disease Distribution</h3>
+    </div>
+    <canvas id="diseaseChart"></canvas>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <h3>Bed Occupancy</h3>
+    </div>
+    <canvas id="bedChart"></canvas>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="panel-header">
+    <h3>Recent Patients</h3>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Patient ID</th>
+          <th>Name</th>
+          <th>Disease</th>
+          <th>Doctor</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for patient in patients %}
+        <tr>
+          <td>{{ patient['Patient ID'] }}</td>
+          <td>{{ patient['Patient Name'] }}</td>
+          <td>{{ patient['Disease Name'] }}</td>
+          <td>{{ patient['Assigned Doctor'] }}</td>
+          <td><span class="status-pill status-{{ patient['Treatment Status']|lower|replace(' ', '-') }}">{{ patient['Treatment Status'] }}</span></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  const diseaseLabels = {{ disease_labels|tojson }};
+  const diseaseValues = {{ disease_values|tojson }};
+  const bedLabels = {{ bed_status_labels|tojson }};
+  const bedValues = {{ bed_status_values|tojson }};
+
+  new Chart(document.getElementById('diseaseChart'), {
+    type: 'doughnut',
+    data: {
+      labels: diseaseLabels,
+      datasets: [{
+        data: diseaseValues,
+        backgroundColor: ['#4f46e5', '#10b981', '#f59e0b', '#ef4444', '#06b6d4', '#8b5cf6']
+      }]
+    },
+    options: { responsive: true, maintainAspectRatio: false }
+  });
+
+  new Chart(document.getElementById('bedChart'), {
+    type: 'bar',
+    data: {
+      labels: bedLabels,
+      datasets: [{
+        label: 'Beds',
+        data: bedValues,
+        backgroundColor: ['#22c55e', '#f97316']
+      }]
+    },
+    options: { responsive: true, maintainAspectRatio: false }
+  });
+</script>
+{% endblock %}

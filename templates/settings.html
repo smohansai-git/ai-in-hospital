@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="panel">
+  <div class="panel-header">
+    <h3>Account Settings</h3>
+  </div>
+
+  <div class="settings-grid">
+    <div class="info-box">
+      <h4>Profile</h4>
+      <p><strong>Name:</strong> {{ user['Full Name'] }}</p>
+      <p><strong>User ID:</strong> {{ user['User ID'] }}</p>
+      <p><strong>Email:</strong> {{ user['Email'] }}</p>
+      <p><strong>Phone:</strong> {{ user['Phone'] }}</p>
+      <p><strong>Role:</strong> {{ user['Role'] }}</p>
+    </div>
+
+    <div class="info-box">
+      <h4>Application Notes</h4>
+      <p>Patient data, user records, and resource allocation are stored in the Excel workbooks inside the <strong>excel_data</strong> folder.</p>
+      <p>This configuration supports local runs and Render deployments when a persistent disk is configured.</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

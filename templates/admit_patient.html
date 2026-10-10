@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="panel">
+  <div class="panel-header">
+    <h3>Patient Admission</h3>
+  </div>
+
+  <form method="post" class="form-grid">
+    <div class="form-group">
+      <label for="patient_id">Patient ID</label>
+      <input type="text" id="patient_id" name="patient_id" required />
+    </div>
+    <div class="form-group">
+      <label for="patient_name">Patient Name</label>
+      <input type="text" id="patient_name" name="patient_name" required />
+    </div>
+    <div class="form-group">
+      <label for="age">Age</label>
+      <input type="number" id="age" name="age" min="0" required />
+    </div>
+    <div class="form-group">
+      <label for="gender">Gender</label>
+      <select id="gender" name="gender" required>
+        <option value="">Select</option>
+        <option>Male</option>
+        <option>Female</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="contact_number">Contact Number</label>
+      <input type="text" id="contact_number" name="contact_number" required />
+    </div>
+    <div class="form-group">
+      <label for="emergency_contact">Emergency Contact</label>
+      <input type="text" id="emergency_contact" name="emergency_contact" />
+    </div>
+    <div class="form-group">
+      <label for="disease_name">Disease Name</label>
+      <input type="text" id="disease_name" name="disease_name" required />
+    </div>
+    <div class="form-group">
+      <label for="disease_category">Disease Category</label>
+      <select id="disease_category" name="disease_category" required>
+        <option value="">Select</option>
+        <option>Communicable</option>
+        <option>Non-communicable</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="severity">Severity</label>
+      <select id="severity" name="severity" required>
+        <option value="">Select</option>
+        <option>Low</option>
+        <option>Moderate</option>
+        <option>High</option>
+        <option>Critical</option>
+      </select>
+    </div>
+    <div class="form-group full-width">
+      <label for="symptoms">Symptoms</label>
+      <textarea id="symptoms" name="symptoms" rows="4" required></textarea>
+    </div>
+
+    <div class="full-width form-actions">
+      <button type="submit" class="primary-btn">Admit Patient</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

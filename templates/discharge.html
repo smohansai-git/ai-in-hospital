@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="panel">
+  <div class="panel-header">
+    <h3>Patient Discharge</h3>
+  </div>
+
+  {% if patients %}
+  <form method="post" class="form-grid compact-form">
+    <div class="form-group full-width">
+      <label for="patient_id">Select patient to discharge</label>
+      <select id="patient_id" name="patient_id" required>
+        <option value="">Choose patient</option>
+        {% for patient in patients %}
+        <option value="{{ patient['Patient ID'] }}">{{ patient['Patient ID'] }} - {{ patient['Patient Name'] }} ({{ patient['Disease Name'] }})</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="full-width form-actions">
+      <button type="submit" class="primary-btn danger-btn">Complete Discharge</button>
+    </div>
+  </form>
+  {% else %}
+  <div class="empty-state">
+    <p>No active patients are awaiting discharge.</p>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}
